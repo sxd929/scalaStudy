@@ -7,7 +7,7 @@ import com.github.tototoshi.csv._
 import scala.util.Try
 
 
-
+// scalastyle:off
 object Main extends App {
 
   println("Hello, world")
@@ -243,6 +243,21 @@ object TypeMatch extends App {
   println(zippedlists)
 }
 
+
+object Practice4 extends App {
+  // try for type match by yourself
+  // define a function f for x is integer print "integer: " + x
+  // for x is a list print "a list"
+  // for x is string print I want to say " + x
+  // for all others, print "silence"
+
+  def f = ???
+
+  // f(List("a"))
+  // f("hello")
+
+}
+
 object ClassIntro extends App {
 
   class Point(var x: Int, var y: Int) {
@@ -298,6 +313,100 @@ object ClassIntro extends App {
   println(catCase.name)
 
   println(TypeMatch.describe(5))
+}
+
+object Practice5 extends App {
+
+  /**
+    * A class to represent tweets.
+    */
+
+  class Tweet(val user: String, val text: String, val retweets: Int) {
+    override def toString: String =
+      "User: " + user + "\n" +
+        "Text: " + text + " [" + retweets + "]"
+  }
+
+  abstract class TweetSet {
+
+    val isEmpty: Boolean
+
+    /**
+      * This method takes a predicate and returns a subset of all the elements
+      * in the original set for which the predicate is true.
+      *
+      * Question: Can we implment this method here, or should it remain abstract
+      * and be implemented in the subclasses?
+      */
+    def filter(p: Tweet => Boolean): TweetSet = ???
+
+    /**
+      * This is a helper method for `filter` that propagetes the accumulated tweets.
+      */
+    def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet
+
+    /**
+      * Returns a new `TweetSet` which contains all elements of this set, and the
+      * the new element `tweet` in case it does not already exist in this set.
+      *
+      * If `this.contains(tweet)`, the current set is returned.
+      */
+    def incl(tweet: Tweet): TweetSet
+
+    /**
+      * Tests if `tweet` exists in this `TweetSet`.
+      */
+    def contains(tweet: Tweet): Boolean
+
+    /**
+      * This method takes a function and applies it to every element in the set.
+      */
+    def foreach(f: Tweet => Unit): Unit
+  }
+
+  class Empty extends TweetSet {
+    val isEmpty = true
+
+    def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = ???
+
+    /**
+      * The following methods are already implemented
+      */
+
+    def contains(tweet: Tweet): Boolean = false
+
+    def incl(tweet: Tweet): TweetSet = new NonEmpty(tweet, new Empty, new Empty)
+
+    def foreach(f: Tweet => Unit): Unit = ()
+  }
+
+  class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
+    val isEmpty = false
+
+    def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = ???
+
+    /**
+      * The following methods are already implemented
+      */
+
+    def contains(x: Tweet): Boolean =
+    if (x.text < elem.text) left.contains(x)
+    else if (elem.text < x.text) right.contains(x)
+    else true
+
+    def incl(x: Tweet): TweetSet = {
+      if (x.text < elem.text) new NonEmpty(elem, left.incl(x), right)
+      else if (elem.text < x.text) new NonEmpty(elem, left, right.incl(x))
+      else this
+    }
+
+    def foreach(f: Tweet => Unit): Unit = {
+      f(elem)
+      left.foreach(f)
+      right.foreach(f)
+    }
+  }
+
 }
 
 object MixinCompo extends App {
@@ -378,3 +487,5 @@ object TitanicExample extends App {
 case class Passenger(PassengerId: String, Pclass: Int, Name: String, Sex: String,
                      Age: Option[Int], Sibsp: Int, Parch: Int, Ticket: String, Fare: Double,
                      Cabin: Option[String], Embarked: String)
+
+// scalastyle:on
