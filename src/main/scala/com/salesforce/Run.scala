@@ -47,6 +47,20 @@ object Basic extends App {
   println(option2.map(x => x + "a"))
 
   println("***********")
+  println("convert types")
+  println(3.toDouble)
+}
+
+object Practice0 extends App
+// create a Map[(Char, int)] called letter count with 'a'-> 2, 'b' -> 4, 'c' -> 5
+// find out what are map.get('a') and map.get('d'), and whether they are empty or not
+// convert the Map into a List
+// print out the first element of this list
+// print out the count of 'a's
+
+object IfFor extends App {
+
+  println("***********")
   // example of if else and function
   val test1 = None
   val test2 = Some("some")
