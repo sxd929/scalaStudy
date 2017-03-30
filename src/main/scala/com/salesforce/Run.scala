@@ -141,6 +141,49 @@ object customizedFun extends App {
 
   val add2 = (x: Int, y: Int) => x + y
   println(add2(1, 2))
+
+  // && represent and; || represent or
+}
+
+object Practice3 extends App {
+  /**
+    * We represent a set by its characteristic function, i.e.
+    * its `contains` predicate.
+    */
+  type Set = Int => Boolean
+
+  /**
+    * Indicates whether a set contains a given element.
+    */
+  def contains(s: Set, elem: Int): Boolean = ???
+
+  /**
+    * Returns the set of the one given element.
+    */
+  def singletonSet(elem: Int): Set = x => ???
+
+  /**
+    * Returns the union of the two given sets,
+    * the sets of all elements that are in either `s` or `t`.
+    */
+  def union(s: Set, t: Set): Set = ???
+
+  /**
+    * The bounds for `forall` and `exists` are +/- 1000.
+    */
+  val bound = 1000
+
+  /**
+    * Returns whether all bounded integers within `s` satisfy `p`.
+    */
+  def forall(s: Set, p: Int => Boolean): Boolean = {
+    def iter(a: Int): Boolean = {
+      if (???) ???
+      else if (???) ???
+      else iter(???)
+    }
+    iter(???)
+  }
 }
 
 object TypeMatch extends App {
