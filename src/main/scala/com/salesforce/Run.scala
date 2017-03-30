@@ -131,6 +131,42 @@ object BasicFun extends App {
   println (collect2)
   println("***********")
 
+  // functions - reduce
+
+  val nums = Array(20, 12, 6, 15, 2, 9)
+  println(nums.reduceLeft(_ + _))
+  println(nums.sum)
+  println("***********")
+
+  val counts = List(("a", 1), ("a", 2), ("b", 3), ("c", 1), ("a", 1))
+  println(counts.groupBy(_._1))
+
+}
+
+object Practice2 extends App {
+  /** Converts the word into its character occurrence list.
+    *
+    *  Note: the uppercase and lowercase version of the character are treated as the
+    *  same character, and are represented as a lowercase character in the occurrence list.
+    *
+    *  Note: you must use `groupBy` to implement this method!
+    */
+  def wordOccurrences(w: String): List[(Char, Int)] = ???
+
+  /** Converts a sentence into its character occurrence list. */
+  def sentenceOccurrences(s: List[String]): List[(Char, Int)] = ???
+
+  /** Subtracts occurrence list `y` from occurrence list `x`.
+    *
+    *  The precondition is that the occurrence list `y` is a subset of
+    *  the occurrence list `x` -- any character appearing in `y` must
+    *  appear in `x`, and its frequency in `y` must be smaller or equal
+    *  than its frequency in `x`.
+    *
+    *  Note: the resulting value is an occurrence - meaning it is sorted
+    *  and has no zero-entries.
+    */
+  def subtract(x: List[(Char, Int)], y: List[(Char, Int)]): List[(Char, Int)] = ???
 }
 
 object customizedFun extends App {
